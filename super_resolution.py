@@ -14,16 +14,16 @@ def bicubic_interpolation(img, scale):
     scaled_img = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_CUBIC)
     return scaled_img
 
-def fsrcnn_x4(img):
+def fsrcnn_x4(img, model_path):
     sr = cv2.dnn_superres.DnnSuperResImpl_create()
-    sr.readModel("models/FSRCNN_x4.pb")  # 学習済みモデル
+    sr.readModel(model_path)  # 学習済みモデル
     sr.setModel("fsrcnn", 4)      # モデル名と倍率
     scaled_img = sr.upsample(img)     # 画像に適用
     return scaled_img
 
-def edsr_x4(img):
+def edsr_x4(img, model_path):
     sr = cv2.dnn_superres.DnnSuperResImpl_create()
-    sr.readModel("models/EDSR_x4.pb")  # 学習済みモデル
+    sr.readModel(model_path)  # 学習済みモデル
     sr.setModel("edsr", 4)      # モデル名と倍率
     scaled_img = sr.upsample(img)     # 画像に適用
     return scaled_img
@@ -43,8 +43,8 @@ if __name__ == '__main__':
 
     scaled_img_bilinear = bilinear_interpolation(input_img, scale)
     scaled_img_bicubic = bicubic_interpolation(input_img, scale)
-    scaled_img_fsrcnn = fsrcnn_x4(input_img)
-    scaled_img_edsr = edsr_x4(input_img)
+    scaled_img_fsrcnn = fsrcnn_x4(input_img, "models/FSRCNN_x4.pb")
+    scaled_img_edsr = edsr_x4(input_img, "models/EDSR_x4.pb")
 
     cv2.imwrite(os.path.join(output_path, 'scaled_image_bilinear.png'), scaled_img_bilinear)
     cv2.imwrite(os.path.join(output_path, 'scaled_image_bicubic.png'), scaled_img_bicubic)
