@@ -21,6 +21,13 @@ def bicubic_interpolation(img, scale):
     scaled_img = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_CUBIC)
     return scaled_img
 
+def lanczos_algorithm(img, scale):
+    h, w = img.shape[:2]
+    new_h, new_w = h * scale, w * scale
+    # 双一次補間
+    scaled_img = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_LANCZOS4)
+    return scaled_img
+
 def fsrcnn_x4(img, model_path):
     sr = cv2.dnn_superres.DnnSuperResImpl_create()
     sr.readModel(model_path)  # 学習済みモデル
