@@ -76,18 +76,18 @@ if __name__ == '__main__':
     os.makedirs(output_path, exist_ok=True)
 
     scaled_img_nearest = nearest_neighbor_interpolation(input_img, scale)
-    scaled_img_bilinear = bilinear_interpolation(input_img, scale)
-    scaled_img_bicubic = bicubic_interpolation(input_img, scale)
-    scaled_img_fsrcnn = fsrcnn_x4(input_img, "models/FSRCNN_x4.pb")
-    scaled_img_espcn = espcn_x4(input_img, "models/ESPCN_x4.pb")
-    scaled_img_edsr = edsr_x4(input_img, "models/EDSR_x4.pb")
-    scaled_img_lapsrn = lapsrn_x4(input_img, "models/LapSRN_x4.pb")
-
     cv2.imwrite(os.path.join(output_path, 'scaled_image_nearest.png'), scaled_img_nearest)
+    scaled_img_bilinear = bilinear_interpolation(input_img, scale)
     cv2.imwrite(os.path.join(output_path, 'scaled_image_bilinear.png'), scaled_img_bilinear)
+    scaled_img_bicubic = bicubic_interpolation(input_img, scale)
     cv2.imwrite(os.path.join(output_path, 'scaled_image_bicubic.png'), scaled_img_bicubic)
+    scaled_img_fsrcnn = fsrcnn_x4(input_img, "models/FSRCNN_x4.pb")
     cv2.imwrite(os.path.join(output_path, 'scaled_image_fsrcnn.png'), scaled_img_fsrcnn)
+    scaled_img_espcn = espcn_x4(input_img, "models/ESPCN_x4.pb")
     cv2.imwrite(os.path.join(output_path, 'scaled_image_espcn.png'), scaled_img_espcn)
+    scaled_img_edsr = edsr_x4(input_img, "models/EDSR_x4.pb")
     cv2.imwrite(os.path.join(output_path, 'scaled_image_edsr.png'), scaled_img_edsr)
+    scaled_img_lapsrn = lapsrn_x4(input_img, "models/LapSRN_x4.pb")
     cv2.imwrite(os.path.join(output_path, 'scaled_image_lapsrn.png'), scaled_img_lapsrn)
+
 
